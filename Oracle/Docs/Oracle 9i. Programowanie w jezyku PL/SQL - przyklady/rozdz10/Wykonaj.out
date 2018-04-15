@@ -1,0 +1,426 @@
+REM Wykonaj.out
+REM Rozdzia³ 10., Scott Urman - Oracle9i Programowanie w jêzyku PL/SQL
+REM Ten skrypt demonstruje wynik dzia³ania skryptu Wykonaj.sql
+REM w programie SQL*Plus.
+
+SQL> @Wykonaj
+SQL> REM Wykonaj.sql
+SQL> REM Rozdzia³ 10., Scott Urman - Oracle9i Programowanie w jêzyku PL/SQL
+SQL> REM Ten skrypt demonstruje dzia³anie uprawnienia systemowego EXECUTE.
+SQL> 
+SQL> set echo on
+SQL> set serveroutput on
+SQL> 
+SQL>-- Najpierw utworzymy u¿ytkowników uzytkownikA oraz uzytkownikB, 
+SQL>-- a tak¿e potrzebne obiekty.  Aby to zrobiæ nale¿y po³¹czyæ siê jako u¿ytkownik
+SQL>-- posiadaj¹cy odpowiednie uprawnienia, np. u¿ytkownik SYSTEM.
+SQL>-- Byæ mo¿e trzeba tak¿e zmieniæ uprawnienie UNLIMITED TABLESPACE
+SQL>-- w celu przyznania jawnych limitów przestrzeni tabel
+SQL>-- w bazie danych.
+SQL> connect system/manager
+Connected.
+SQL> DROP USER UzytkownikA CASCADE;
+
+User dropped.
+
+SQL> CREATE USER UzytkownikA IDENTIFIED BY UzytkownikA;
+
+User created.
+
+SQL> GRANT CREATE SESSION, CREATE TABLE, CREATE PROCEDURE,
+  2        UNLIMITED TABLESPACE, CREATE ROLE, DROP ANY ROLE TO UzytkownikA;
+
+Grant succeeded.
+
+SQL> 
+SQL> DROP USER UzytkownikB CASCADE;
+
+User dropped.
+
+SQL> CREATE USER UzytkownikB IDENTIFIED BY UzytkownikB;
+
+User created.
+
+SQL> GRANT CREATE SESSION, CREATE TABLE, CREATE PROCEDURE,
+  2        UNLIMITED TABLESPACE TO UzytkownikB;
+
+Grant succeeded.
+
+SQL> 
+SQL>-- ***********************************
+SQL>-- Sytuacja pokazana na rysunku 10.14: Wszystkie obiekty nale¿¹ do uzystkownika UzytkownikA.
+SQL>-- ***********************************
+SQL> connect UzytkownikA/UzytkownikA
+Connected.
+SQL> 
+SQL>-- Najpierw utworzymy tabelê grupy.
+SQL>CREATE TABLE grupy (
+ 2   wydzial           CHAR(3),
+ 3   kurs              NUMBER(3),
+ 4   opis              VARCHAR2(2000),
+ 5   maks_l_studentow  NUMBER(3),
+ 6   biez_l_studentow  NUMBER(3),
+ 7   liczba_zaliczen   NUMBER(1),
+ 8   pokoj_id          NUMBER(5));
+
+Table created.
+
+SQL> 
+SQL>INSERT INTO grupy(wydzial, kurs, opis, maks_l_studentow,
+  2                    biez_l_studentow, liczba_zaliczen, pokoj_id)
+  3   VALUES ('HIS', 101, 'Historia 101', 30, 11, 4, 20000);
+
+1 row created.
+
+SQL> 
+SQL>INSERT INTO grupy(wydzial, kurs, opis, maks_l_studentow,
+  2                   biez_l_studentow, liczba_zaliczen, pokoj_id)
+  3   VALUES ('HIS', 301, 'Historia 301', 30, 0, 4, 20004);
+
+1 row created.
+
+SQL> 
+SQL>INSERT INTO grupy(department, kurs, opis, maks_l_studentow,
+  2                   biez_l_studentow, liczba_zaliczen, pokoj_id)
+  3   VALUES ('INF', 101, 'Informatyka 101', 50, 0, 4, 20001);
+
+1 row created.
+
+SQL> 
+SQL>INSERT INTO grupy(department, kurs, opis, maks_l_studentow,
+  2                   biez_l_studentow, liczba_zaliczen, pokoj_id)
+  3   VALUES ('EKN', 203, 'Ekonomia 203', 15, 0, 3, 20002);
+
+1 row created.
+
+SQL> 
+SQL>INSERT INTO grupy(wydzial, kurs, opis, maks_l_studentow,
+  2                   biez_l_studentow, liczba_zaliczen, pokoj_id)
+  3   VALUES ('INF', 102, 'Informatyka 102', 35, 3, 4, 20003);
+
+1 row created.
+
+SQL> 
+SQL>INSERT INTO grupy(wydzial, kurs, opis, maks_l_studentow,
+  2                   biez_l_studentow, liczba_zaliczen, pokoj_id)
+  3   VALUES ('MUZ', 410, 'Muzyka 410', 5, 4, 3, 20005);
+
+1 row created.
+
+SQL> 
+SQL>INSERT INTO grupy(wydzial, kurs, opis, maks_l_studentow,
+  2                   biez_l_studentow, liczba_zaliczen, pokoj_id)
+  3   VALUES ('EKN', 101, 'Ekonomia 101', 50, 0, 4, 20007);
+
+1 row created.
+
+SQL> 
+SQL>INSERT INTO grupy(wydzial, kurs, opis, maks_l_studentow,
+  2                   biez_l_studentow, liczba_zaliczen, pokoj_id)
+  3   VALUES ('¯YW', 307, '¯ywienie 307', 20, 2, 4, 20008);
+
+1 row created.
+
+SQL> 
+SQL>INSERT INTO grupy(wydzial, kurs, opis, maks_l_studentow,
+  2                   biez_l_studentow, liczba_zaliczen, pokoj_id)
+  3   VALUES ('MUZ', 100, 'Muzyka 100', 100, 0, 3, NULL);
+
+1 row created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL>-- Oraz tabelê tabela_tymcz.
+SQL>CREATE TABLE tabela_tymcz (
+  2   kol_num    NUMBER,
+  3   kol_znak   VARCHAR2(60)
+  4   );
+
+Table created.
+
+SQL> 
+SQL>-- Potrzebna bêdzie tak¿e procedura PrawieKomplet:
+SQL>CREATE OR REPLACE FUNCTION PrawieKomplet (
+  2  p_Wydzial zajecia.wydzial%TYPE,
+  3  p_Kurs    zajecia.kurs%TYPE)
+  4  RETURN BOOLEAN IS
+  5
+  6  z_Biez_l_Studentow NUMBER;
+  7  z_Maks_L_Studentow NUMBER;
+  8  z_WartoscWyniku    BOOLEAN;
+  9  z_ProcentUkpl      CONSTANT NUMBER := 90;
+ 10  BEGIN
+ 11  -- Uzyskanie bie¿¹cej i maksymalnej liczby studentów dla po¿¹danego kursu.
+ 12   SELECT biez_l_studentow, maks_l_studentow
+ 13     INTO z_Biez_L_Studentow, z_Maks_L_Studentow
+ 14     FROM zajecia
+ 15     WHERE wydzial = p_Wydzial
+ 16     AND kurs = p_Kurs;
+ 17
+ 18  -- Zwrócenie wartoœci TRUE, je¿eli stan liczebny studentów zarejestrowanych  
+ 19  -- na zajêcia jest wiêkszy ni¿ procent wartoœci maksymalnej okreœlony przez zmienn¹  
+ 20  -- z_Procent_Ukpl. W przeciwnym przypadku zwrócenie wartoœci FALSE.
+ 21  IF (z_Biez_L_Studentow / z_Maks_L_Studentow * 100) > z_ProcentUkpl 
+ 22  THEN
+ 23    z_WartoscWyniku := TRUE;
+ 24  ELSE
+ 25    z_WartoscWyniku := FALSE;
+ 26  END IF;
+ 27
+ 28  RETURN z_WartoscWyniku;
+ 29 END PrawieKomplet;
+ 30 /
+ 
+Function created.
+
+SQL> 
+SQL>-- oraz ZarejestrujPelneGrupy:
+SQL>CREATE OR REPLACE PROCEDURE ZarejestrujPelneGrupy AS
+  2   CURSOR k_Grupy IS
+  3     SELECT wydzial, kurs
+  4       FROM grupy;
+  5 BEGIN
+  6   FOR z_RekordGrupy IN k_Grupy LOOP
+  7     -- Zapisanie w tabeli tabela_tymcz wszystkich grup, które nie maj¹ 
+  8     -- du¿ej liczby wolnych miejsc. 
+  9     IF PrawieKomplet(z_RekordGrupy.wydzial, z_RekordGrupy.kurs) THEN
+ 10        INSERT INTO tabela_tymcz (kol_znak) VALUES
+ 11          ('Grupa' || z_RekordGrupy.wydzial || ' ' || z_RekordGrupy.kurs ||
+ 12           ' jest prawie pe³na!');
+ 13     END IF;
+ 14   END LOOP;
+ 15 END ZarejestrujPelneGrupy;
+ 16 /
+Procedure created.
+
+SQL> 
+SQL>-- Teraz, kiedy wszystkie obiekty utworzono, udzielimy u¿ytkownikowi UzytkownikB 
+SQL>-- uprawnienia EXECUTE do procedury ZarejestrujPelneGrupy.  Zwróæmy uwage, ¿e UzytkownikB
+SQL>-- nie ma innych uprawnieñ do obiektów u¿ytkownika UzytkownikA.
+SQL> GRANT EXECUTE ON ZarejestrujPelneGrupy to UzytkownikB;
+
+Grant succeeded.
+
+SQL> 
+SQL>-- po³¹czymy siê jako UzytkownikB i uruchomimy procedurê ZarejestrujPelneGrupy.  
+SQL>-- Wyniki zaostan¹ zapisane w tabeli tabela_tymcz, która nale¿y do u¿ytkownika UzytkownikA, 
+SQL>-- poniewa¿ jest to jedyna kopia tabeli tabela_tymcz.
+SQL> connect UzytkownikB/UzytkownikB
+Connected.
+SQL> BEGIN
+  2    UzytkownikA.ZarejestrujPelneGrupy;
+  3    COMMIT;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL>-- Wykonamy zapytanie do tabeli tabela_tymcz jako UzytkownikA, aby sprawdziæ wyniki.
+SQL> connect UzytkownikA/UzytkownikA
+Connected.
+SQL> SELECT * FROM tabela_tymcz;
+
+   KOL_NUM KOL_ZNAK                                                             
+---------- ------------------------------------------------------------         
+           Grupa MUZ 410 jest prawie pe³na!                                              
+
+SQL> 
+SQL>-- ***********************************
+SQL>-- Sytuacja pokazana na rysunku 10.15: UzytkownikB tak¿e posiada kopiê tabeli
+SQL>--                                      tabela_tymcz.
+SQL>-- ***********************************
+SQL> 
+SQL> -- Create UzytkownikB.tabela_tymcz.
+SQL> connect UzytkownikB/UzytkownikB
+Connected.
+SQL>CREATE TABLE tabela_tymcz (
+  2   kol_num    NUMBER,
+  3   kol_znak   VARCHAR2(60)
+  4   );
+
+Table created.
+
+SQL>-- Teraz, je¿eli wywo³amy procedurê UzytkownikA.ZarejestrujPelneGrupy, Kopia tabeli 
+SQL>-- tabela_tymcz nale¿¹ca do u¿ytkownika UzytkownikA ulegnie modyfikacji.
+SQL> BEGIN
+  2    UzytkownikA.ZarejestrujPelneGrupy;
+  3    COMMIT;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL>-- Wykonamy zapytanie do tabeli tabela_tymcz nale¿¹cej do u¿ytkownika UzytkownikB: 
+SQL>-- To zapytanie nie powinno zwróciæ ¿adnych wierszy.
+SQL> SELECT * FROM tabela_tymcz;
+
+no rows selected
+
+SQL> 
+SQL>-- Wykonamy zapytanie do tabeli tabela_tymcz nale¿¹cej do u¿ytkownika UzytkownikA:
+SQL>-- To zapytanie zwróci dwa wiersze - po jednym dla ka¿dego wykonania.
+SQL> connect UzytkownikA/UzytkownikA
+Connected.
+SQL> SELECT * FROM tabela_tymcz;
+
+   KOL_NUM KOL_ZNAK                                                             
+---------- ------------------------------------------------------------         
+           Grupa MUZ 410 jest prawie pa³na!                                              
+           Grupa MUZ 410 jest prawie pe³na!                                              
+
+SQL> 
+SQL>-- ***********************************
+SQL>-- Sytuacja przedstawiona na rysunku 10.16: UzytkownikB jest w³ascicielem
+SQL>-- tabeli tabela_tymcz oraz procedury ZarejestrujPelneGrupy, Uprawnienia nadane 
+SQL>-- bezpoœrednio.
+SQL>-- ***********************************
+SQL> 
+SQL>-- Najpierw usuniemy tabelê i procedurê bêd¹c po³¹czonym jako UzytkownikA:
+SQL> connect UzytkownikA/UzytkownikA
+Connected.
+SQL> DROP TABLE tabela_tymcz;
+
+Table dropped.
+
+SQL> DROP PROCEDURE ZarejestrujPelneGrupy;
+
+Procedure dropped.
+
+SQL> 
+SQL>-- Teraz nadamy uprawnienia uzytkownikowi UzytkownikB do procedury PrawieKomplet oraz tabeli grupy:
+
+SQL> GRANT SELECT ON grupy TO UzytkownikB;
+
+Grant succeeded.
+
+SQL> GRANT EXECUTE ON PrawieKomplet TO UzytkownikB;
+
+Grant succeeded.
+
+SQL> 
+SQL>-- UzytkownikB ju¿ posiada tabelê tabela_tymcz, zatem musimy tylko utworzyæ
+SQL>-- procedurê.  Zwróæmy uwagê na ti, ¿e dziêki notacji z kropk¹ odnosimy siê do procedury PrawieKomplet 
+SQL>-- w schemacie u¿ytkownika UzytkownikA.  Gdybyœmy nie udzielili powy¿szych uprawnieñ,
+SQL>-- procedura nie skompilowa³aby siê.
+SQL> connect UzytkownikB/UzytkownikB
+Connected.
+SQL> CREATE OR REPLACE PROCEDURE ZarejestrujPelneGrupy AS
+  2   CURSOR k_Grupy IS
+  3     SELECT wydzial, kurs
+  4       FROM grupy;
+  5  BEGIN
+  6   FOR z_RekordGrupy IN k_Grupy LOOP
+  7    -- Zapisanie w tabeli tabela_tymcz wszystkich grup, które nie maj¹ 
+  8    -- du¿ej liczby wolnych miejsc. 
+  9    IF PrawieKomplet(z_RekordGrupy.wydzial, z_RekordGrupy.kurs) THEN
+ 10       INSERT INTO tabela_tymcz (kol_znak) VALUES
+ 11       ('Grupa' || z_RekordGrupy.wydzial || ' ' || z_RekordGrupy.kurs ||
+ 12        ' jest prawie pe³na!');
+ 13    END IF;
+ 14  END LOOP;
+ 15 END ZarejestrujPelneGrupy;
+ 16 /
+
+Procedure created.
+
+SQL> 
+SQL>-- Je¿eli teraz wykonamy procedurê ZarejestrujPelneGrupy, wyniki bêd¹ zapisane
+SQL>-- w tabeli tabela_tymcz nale¿¹cej do u¿ytkownika UzytkownikB.
+SQL> BEGIN
+  2    ZarejestrujPelneGrupy;
+  3    COMMIT;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL>-- To zapytanie powinno zwróciæ jeden wiersz.
+SQL> SELECT * FROM tabela_tymcz;
+
+   KOL_NUM KOL_ZNAK                                                             
+---------- ------------------------------------------------------------         
+           Grupa MUZ 410 jest prawie pe³na!                                              
+
+SQL> 
+SQL>-- ***********************************
+SQL>-- Sytuacja przedstawiona na rysunku 10.17: UzytkownikB jest w³aœcicielem tabeli tabela_tymcz oraz
+SQL>--                                      procedury ZarejestrujPelneGrupy, Uprawnienia nadawane
+SQL>--                                      za poœrednictwem roli.
+SQL>-- ***********************************
+SQL> 
+SQL> connect UzytkownikA/UzytkownikA
+Connected.
+SQL>-- Najpierw odbierzemy uprzednio nadane uprawnienia
+SQL> REVOKE SELECT ON grupy FROM UzytkownikB;
+
+Revoke succeeded.
+
+SQL> REVOKE EXECUTE ON PrawieKomplet FROM UzytkownikB;
+
+Revoke succeeded.
+
+SQL> 
+SQL>-- Teraz utworzymy rolê
+SQL> DROP ROLE Rola_UzytkownikA;
+
+Role dropped.
+
+SQL> CREATE ROLE Rola_UyztkownikA;
+
+Role created.
+
+SQL> GRANT SELECT ON grupy TO Rola_UzytkownikA;
+
+Grant succeeded.
+
+SQL> GRANT EXECUTE ON PrawieKomplet TO Rola_UzytkownikA;
+
+Grant succeeded.
+
+SQL> GRANT Rola_UzytkownikA TO UzytkownikB;
+
+Grant succeeded.
+
+SQL> 
+SQL>-- Próba utworzenia procedury ZarejestrujPelneGrupy w schemacie u¿ytkownika UzytkownikB
+SQL>-- spowoduje teraz powstanie b³êdów PLS-201:
+SQL> connect UzytkownikB/UzytkownikB
+Connected.
+SQL> CREATE OR REPLACE PROCEDURE ZarejestrujPelneGrupy AS
+  2   CURSOR k_Grupy IS
+  3     SELECT wydzial, kurs
+  4       FROM grupy;
+  5   BEGIN
+  6   FOR z_RekordGrupy IN k_Grupy LOOP
+  7    -- Zapisanie w tabeli tabela_tymcz wszystkich grup, które nie maj¹ 
+  8    -- du¿ej liczby wolnych miejsc. 
+  9   IF PrawieKomplet(z_RekordGrupy.wydzial, z_RekordGrupy.kurs) THEN
+ 10      INSERT INTO tabela_tymcz (kol_znak) VALUES
+ 11        ('Grupa' || z_RekordGrupy.wydzial || ' ' || z_RekordGrupy.kurs ||
+ 12         ' jest prawie pe³na!');
+ 13   END IF;
+ 14  END LOOP;
+ 15 END ZarejestrujPelneGrupy;
+ 16 /
+
+Warning: Procedure created with compilation errors.
+
+SQL> 
+SQL> show errors
+Errors for PROCEDURE RECORDFULLCLASSES:
+
+LINE/COL ERROR                                                                  
+-------- -----------------------------------------------------------------      
+3/5      PL/SQL: SQL Statement ignored                                          
+4/12     PLS-00201: identifier 'UzytkownikA.GRUPY' must be declared                 
+9/5      PL/SQL: Statement ignored                                              
+9/8      PLS-00201: identifier 'UzytkownikA.PRAWIEKOMPLET' must be declared              
+SQL> 
+SQL> exit

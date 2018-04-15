@@ -1,0 +1,21 @@
+<%@ page language="PL/SQL" %>
+
+<%@ plsql procedure="show_cust_call" %>
+
+<%@ plsql parameter="custid" type="NUMBER" default="101" %>
+
+<HTML>
+<BODY>
+<form method="POST" action="show_cust">
+
+<p>Enter the Customer ID:
+
+<input type="text" name="custid">
+
+<input type="submit" value="Submit">
+
+</form>
+
+</BODY>
+
+</HTML>	

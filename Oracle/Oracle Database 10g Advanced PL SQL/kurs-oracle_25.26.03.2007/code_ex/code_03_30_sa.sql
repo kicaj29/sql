@@ -1,0 +1,3 @@
+INSERT INTO TABLE
+  (SELECT p.items FROM pOrder p WHERE p.ordid = 500)
+VALUES (44, 444);

@@ -1,0 +1,1 @@
+EXECUTE c_output(1000000)

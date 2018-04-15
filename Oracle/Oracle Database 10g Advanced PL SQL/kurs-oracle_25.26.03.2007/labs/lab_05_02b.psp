@@ -1,0 +1,22 @@
+<%@ page language="" %>
+
+<%@ plsql procedure="" %>
+
+<%@ plsql parameter="" type="" default="" %>
+
+<HTML>
+
+<BODY>
+
+<form method="POST" action="">
+
+
+<input type="" name="">
+
+<input type="" value="">
+
+</form>
+
+</BODY>
+
+</HTML>	

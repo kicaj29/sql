@@ -1,0 +1,12 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="show_customer_call" %>
+<%@ plsql parameter="mincredit" type="NUMBER" default= "3000" %>
+<html>
+<body>
+<form method="POST" action="show_customers_hc">
+<p>Enter the credit limit:
+<input type="text" name="mincredit">
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>

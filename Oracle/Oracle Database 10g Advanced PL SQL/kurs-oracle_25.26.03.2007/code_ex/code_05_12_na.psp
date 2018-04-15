@@ -1,0 +1,18 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="show_customers" %>
+<HTML>
+<HEAD><TITLE>Show Contents of Customers (using a loop) </TITLE></HEAD>
+<BODY>
+<UL>
+<% for item in (select customer_id, cust_first_name,
+                credit_limit, cust_email
+                from customers order by credit_limit) loop %>
+<LI>
+ID = <%= item.customer_id %><BR>
+Name = <%= item.cust_first_name %><BR>
+Credit = <%= item.credit_limit %><BR>
+Email = <I><%= item.cust_email %></I><BR>
+<% end loop; %>
+</UL>
+</BODY>
+</HTML>

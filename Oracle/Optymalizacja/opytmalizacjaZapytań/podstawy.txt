@@ -1,0 +1,4 @@
+Regu³y optymalizacji:
+
+1. Przenieœæ selekcje jak najwy¿ej w drzewie rozbioru.
+2. Dodaæ kolejnoœæ z³¹czeñ wed³ug selekcji silnie redukuj¹cej.

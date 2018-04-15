@@ -1,0 +1,19 @@
+1. cardinality
+
+Two meanings:
+
+- Kardynalnoœæ relacji to liczba rekordów encji (tabeli) nadrzêdnej powi¹zanych z rekordami encji podrzêdnej.
+  Przyk³ady: "jeden do jednego", "jeden do wielu", "wiele do wielu"
+  
+- Liczba ró¿nych wartoœci dziedziny lub kolumny tabeli;
+  Przyk³ady: kardynalnoœæ kolumny "p³eæ" wynosi 2
+  
+2. Selektywnoœæ indeksu
+
+Selektywnoœæ indeksu jest miar¹ procentow¹, która mówi, na ile dany indeks mo¿e byæ przydatny do znajdowania 
+wierszy podczas wykonywania zapytañ.
+
+selektywnoœæ = (liczba wierszy jednoznacznie identyfikowanych przez indeks) / (ca³kowita liczba wierszy w tabeli)
+
+Im wiêksza selektywnoœæ indeksu, tym wiêksze prawdopodobieñstwo,¿e bêdzie on wykorzystany przez optymalizator zapytañ.
+Dlatego te¿ jako kolumny kandyduj¹ce do za³o¿enia indeksów nale¿y wybieraæ te, które maj¹ wysok¹ selektywnoœæ.

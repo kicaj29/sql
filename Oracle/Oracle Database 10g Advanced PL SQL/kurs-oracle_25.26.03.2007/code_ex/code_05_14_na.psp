@@ -1,0 +1,34 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="show_customers_hc" %>
+<%@ plsql parameter="mincredit" type="NUMBER" default="3000" %>
+<%! color varchar2(7); %>
+<HTML>
+<HEAD><TITLE>Show Customers Greater Than Specified Credit Limit</TITLE></HEAD>
+<BODY>
+<P>This report shows all customers, highlighting those having credit limit is greater than <%= mincredit %>.
+<TABLE BORDER>
+<TR>
+<TH>ID</TH>
+<TH>Name</TH>
+<TH>Credit</TH>
+<TH>Email</TH>
+</TR>
+<%
+for item in (select * from customers 
+             order by credit_limit desc) loop
+  if item.credit_limit > mincredit then
+    color := '#white';
+  else
+    color := '#green';
+  end if;
+%>
+<TR BGCOLOR="<%= color %>">
+<TD><BIG><%= item.customer_id %></BIG></TD>
+<TD><BIG><%= item.cust_first_name %></BIG></TD>
+<TD><BIG><%= item.credit_limit %></BIG></TD>
+<TD><%= item.cust_email %></TD>
+</TR>
+<% end loop; %>
+</TABLE>
+</BODY>
+</HTML>

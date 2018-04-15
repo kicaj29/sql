@@ -1,0 +1,109 @@
+/* kursor1.pc
+ * Rozdzia³ 6., Scott Urman - Oracle9i Programowanie w jêzyku PL/SQL
+ * Ten program Pro*C ilustruje zastosowanie zmiennej kursora.
+ */
+
+/* Do³¹czenie plików nag³ówków jêzyka C oraz SQL. */
+#include <stdio.h>
+EXEC SQL INCLUDE SQLCA;
+
+  /* Ci¹g znaków do przechowywania nazwy u¿ytkownika i has³a. */
+  char *z_NazwaUzytkownika = "przyklad/przyklad";
+
+  /* Zmienna kursora SQL */
+  SQL_CURSOR z_ZmKursora;
+
+  /* Zmienna typu int u¿ywana do zarz¹dzania wyborem tabeli. */
+  int z_Tabela;
+
+  /* Zmienne wyjœciowe dla pokoi. */
+  int z_PokojID;
+  VARCHAR z_Opis[2001];
+
+  /* Zmienne wyjœciowe dla zajêæ. */
+  VARCHAR z_Wydzial[4];
+  int z_Kurs;
+EXEC SQL END DECLARE SECTION;
+
+/* Podprogram obs³ugi b³êdów. Wydrukowanie komunikatu o b³êdzie i wyjœcie. */
+void obsluga_bledow() {
+  printf("Wyst¹pi³ b³¹d SQL!\n");
+  printf("%.*s\n", sqlca.sqlerrm.sqlerrml, sqlca.sqlerrm.sqlerrmc);
+  EXEC SQL ROLLBACK WORK RELEASE;
+  exit(1);
+}
+  
+int main() {
+  /* Ci¹g znaków do przechowywania danych wejœciowych u¿ytkownika. */
+  char z_Wybor[20];
+
+  /* Ustawienie obs³ugi b³êdów. Za ka¿dym razem kiedy wyst¹pi b³¹d SQL, 
+     zostanie wywo³ana procedura obsluga_bledow(). */
+  EXEC SQL WHENEVER SQLERROR DO obsluga_bledow();
+
+  /* Po³¹czenie z baz¹ danych. */
+  EXEC SQL CONNECT :z_NazwaUzytkownika;
+  printf("Po³¹czony z baz¹ danych Oracle.\n");
+
+  /* Przydziel zmienna kursora. */
+  EXEC SQL ALLOCATE :z_ZmKursora;
+
+  /* Wyœwietlenie komunikatu z pytaniem do u¿ytkownika o dane wejœciowe i umieszczenie 
+     dokonanego przez nich wyboru w zmiennej z_Wybor. */
+  printf("Wybierz (Z)ajêcia lub (P)okoje. WprowadŸ z lub p: ");
+  gets(z_Wybor);
+
+  /* Wyznaczenie w³aœciwej tabeli. */
+  if (z_Wybor[0] == 'z')
+    z_Tabela = 1;
+  else
+    z_Tabela = 2;
+
+  /* Otwarcie zmiennej kursora za u¿ywaj¹c osadzonego bloku PL/SQL. */
+  EXEC SQL EXECUTE
+    BEGIN
+      IF :z_Tabela = 1 THEN
+        /* Otwarcie zmiennej dla tabeli grupy. */
+        OPEN :z_ZmKursora FOR
+          SELECT wydzial, kurs
+            FROM grupy;
+      ELSE
+        /* Otwarcie zmiennej dla tabeli pokoje. */
+        OPEN :z_ZmKursora FOR
+          SELECT pokoj_id, opis
+            FROM pokoje;
+      END IF;
+    END;
+  END-EXEC;
+
+  /* Wyjœcie z pêtli po zakoñczeniu pobierania. */
+  EXEC SQL WHENEVER NOT FOUND DO BREAK;
+
+  /* Rozpoczêcie wykonywania pêtli pobierania. */
+  for (;;) {
+    if (z_Tabela == 1) {
+      /* Pobranie danych z tabeli grupy. */
+      EXEC SQL FETCH :z_ZmKursora
+        INTO :z_Wydzial, :z_Kurs;
+      /* Wyœwietlenie danych na ekranie. Poniewa¿ zmienna z_Wydzial jest typu
+         VARCHAR, u¿ycie pola .len dla bie¿¹cej d³ugoœci oraz pola .arr dla danych. */
+      printf("%.*s %d\n", z_Wydzial.len, z_Wydzial.arr, z_Kurs);
+    }
+    else {
+      /* Pobranie danych z tabeli pokoje. */
+      EXEC SQL FETCH :z_ZmKursora
+        INTO :z_PokojID, z_Opis;
+
+      /* Wyœwietlenie danych na ekranie. Poniewa¿ zmienna z_Opis jest typu VARCHAR, 
+         u¿ycie pola .len dla bie¿¹cej d³ugoœci oraz pola .arr dla danych. */
+      printf("%d %.*s\n", z_PokojID, z_Opis.len, z_Opis.arr);
+    }
+  }
+
+  /* Zamkniêcie kursora. */
+  EXEC SQL CLOSE :z_ZmKursora;
+
+  /* Roz³¹czenie z baz¹ danych. */
+  EXEC SQL COMMIT WORK RELEASE;
+}
+

@@ -1,0 +1,8 @@
+VARIABLE x VARCHAR2(20)
+EXECUTE :x := '1234567887654321'
+
+@ccformat
+
+EXECUTE ccformat(:x)
+
+PRINT x

@@ -1,0 +1,5 @@
+BEGIN
+  DrukujStudentow('Informatyka');
+END;
+/
+

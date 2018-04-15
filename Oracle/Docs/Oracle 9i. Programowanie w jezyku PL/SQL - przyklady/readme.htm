@@ -1,0 +1,417 @@
+<HTML><HEAD><TITLE>Oracle9i. Programowanie w języku PL/SQL - przykłady online</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-2">
+<BODY>Kod źródłowy wszystkich przykładów zamieszczonych w książce 
+<U>Oracle9<I>i</I> Programowanie w języku PL/SQL </U>znajduje się w katalogu 
+<TT>kody</TT> na płycie CD. Skrypty dla każdego z rozdziałów można znaleźć w 
+oddzielnych katalogach. Na przykład, przykłady z rozdziału 1. można znaleźć w 
+katalogu <TT>kody\rozdz1</TT>. Dodatkowo istnieje jeden skrypt - - 
+<TT>tabele.sql</TT>, w głównym katalogu <TT>kody</TT>.&nbsp;Skrypt ten tworzy 
+tabele wykorzystywane w przykładach zaprezentowanych w tej 
+książce.&nbsp;Pozostałe pliki są następujące: 
+<H4>Rozdział 1: Wprowadzenie do języka PL/SQL</H4>
+<DL>
+  <DT><TT>rozdz01\3gl_4gl.sql</TT> 
+  <DD>Demonstruje polecenia SQL i PL/SQL 
+  <DT><TT>rozdz01\Kolekcje.sql</TT> 
+  <DD>Pokazuje użycie różnych typów kolekcji 
+  <DT><TT>rozdz01\Warunkowe.sql</TT> 
+  <DD>Ilustruje zastosowanie instrukcji warunkowej 
+  <DT><TT>rozdz01\KursorPetla.sql</TT> 
+  <DD>Demonstruje pętlę pobierającą dane z kursora 
+  <DT><TT>rozdz01\Blad.sql</TT> 
+  <DD>Ilustruje program obsługi wyjątków 
+  <DT><TT>rozdz01\NumerycznaPetla.sql</TT> 
+  <DD>Pokazuje pętlę numeryczną FOR 
+  <DT><TT>rozdz01\WyswietlStudentow.sql</TT> 
+  <DD>Ilustruje zastosowanie procedury składowanej 
+  <DT><TT>rozdz01\PokojePkt.sql</TT> 
+  <DD>Prezentuje pakiet PL/SQL 
+  <DT><TT>rozdz01\ProstaPetla.sql</TT> 
+  <DD>Demonstruje prostą pętlę </DD></DL>
+<H4>Rozdział 2: Środowiska programisty oraz wykonawcze</H4>
+<DL>
+  <DT><TT>rozdz02\Plik.sql</TT> 
+  <DD>Przykładowy plik do wykonania w środowisku SQL*Plus 
+  <DT><TT>rozdz02\Setup.sql</TT> 
+  <DD>Konfiguruje przykładowe środowisko dla narzędzi programistycznych 
+  <DT><TT>rozdz02\ProstaKlasa.sql</TT> 
+  <DD>Skrypt tworzący prostą klasę Javy </DD></DL>
+<H4>Rozdział 3: Podstawy języka PL/SQL</H4>
+<DL>
+  <DT><TT>rozdz03\wszystkietrzy.sql</TT> 
+  <DD>Prezentuje wszystkie trzy sekcje bloku PL/SQL 
+  <DT><TT>rozdz03\AnonimowyBlok.sql</TT> 
+  <DD>Przykład anonimowego bloku 
+  <DT><TT>rozdz03\case.sql</TT> 
+  <DD>Demonstruje instrukcję CASE 
+  <DT><TT>rozdz03\komentarze.sql</TT> 
+  <DD>Demonstruje poprawne i niepoprawne komentarze 
+  <DT><TT>rozdz03\exitwhen.sql</TT> 
+  <DD>Pokazuje zastosowanie klauzuli EXIT WHEN 
+  <DT><TT>rozdz03\petlafor.sql</TT> 
+  <DD>Przykład pętli FOR. 
+  <DT><TT>rozdz03\zakresfor.sql</TT> 
+  <DD>Prezentuje zakres indeksu dla konstrukcji FOR LOOP 
+  <DT><TT>rozdz03\goto.sql</TT> 
+  <DD>Ilustruje zastosowanie instrukcji GOTO. 
+  <DT><TT>rozdz03\if1.sql</TT> 
+  <DD>Demonstruje zastosowanie instrukcji IF 
+  <DT><TT>rozdz03\if2.sql</TT> 
+  <DD>Instrukcja IF w tym przykładzie pokazuje zastosowanie więcej niż jednej 
+  instrukcji dla każdego z warunków 
+  <DT><TT>rozdz03\calkowite.sql</TT> 
+  <DD>Prezentuje różne typy całkowite 
+  <DT><TT>rozdz03\Blok_etykieta.sql</TT> 
+  <DD>Przykład bloku z etykietą 
+  <DT><TT>rozdz03\zagniezdz.sql</TT> 
+  <DD>Ilustruje 2 zagnieżdżone bloki 
+  <DT><TT>rozdz03\null.sq</TT> 
+  <DD>Prezentuje wyrażenie NULL jako instrukcję. 
+  <DT><TT>rozdz03\Procedura.sql</TT> 
+  <DD>Ilustruje zastosowanie procedury w języku PL/SQL 
+  <DT><TT>rozdz03\PrzypisanieRekordu.sql</TT> 
+  <DD>Prezentuje poprawne i niepoprawne operacje przypisania rekordu 
+  <DT><TT>rozdz03\select.sql</TT> 
+  <DD>Pokazuje sposób wybieranie danych do rekordu 
+  <DT><TT>rozdz03\prosta.sql</TT> 
+  <DD>Przykład prostej pętli 
+  <DT><TT>rozdz03\wyzwalacz.sql</TT> 
+  <DD>Przykład użycia wyzwalacza w bazie danych 
+  <DT><TT>rozdz03\while1.sql</TT> 
+  <DD>Pokazuje zastosowanie pętli WHILE. 
+  <DT><TT>rozdz03\while2.sql</TT> 
+  <DD>Pętla WHILE pokazana w tym przykładzie zawiera warunek NULL </DD></DL>
+<H4>Rozdział 4: SQL w języku PL/SQL</H4>
+<DL>
+  <DT><TT>rozdz04\autoPragma.sql</TT> 
+  <DD>Ilustruje poprawne i niepoprawne użycie dyrektywy PRAGMA 
+  AUTONOMOUS_TRANSACTION 
+  <DT><TT>rozdz04\autoSavePoints.sql</TT> 
+  <DD>Prezentuje interakcje pomiędzy punktami zachowania, a autonomicznymi 
+  transakcjami 
+  <DT><TT>rozdz04\autoTrans.sql</TT> 
+  <DD>Demonstruje autonomiczne transakcje 
+  <DT><TT>rozdz04\ZmienneDowiazane.sql</TT> 
+  <DD>ilustruje zastosowanie zmiennych dowiązanych 
+  <DT><TT>rozdz04\DemoZbiorcze.sql</TT> 
+  <DD>ilustruje przetwarzanie masowe 
+  <DT><TT>rozdz04\delete.sql</TT> 
+  <DD>Ilustruje zastosowanie instrukcji DELETE. 
+  <DT><TT>rozdz04\insert.sql</TT> 
+  <DD>prezentuje zastosowanie instrukcji INSERT 
+  <DT><TT>rozdz04\ReturningInto.sql</TT> 
+  <DD>Pokazuje zastosowanie klauzuli RETURNING INTO 
+  <DT><TT>rozdz04\select.sql</TT> 
+  <DD>zawiera przykłady instrukcji SELECT 
+  <DT><TT>rozdz04\update.sql</TT> 
+  <DD>pokazuje kilka instrukcji UPDATE 
+  <DT><TT>rozdz04\KlauzulaWhere.sql</TT> 
+  <DD>pokazuje kilka różnych klauzul WHERE </DD></DL>
+<H4>Rozdział 5: Wbudowane funkcje SQL</H4>W tym rozdziale nie ma przykładów 
+online. 
+<H4>Rozdział 6: Kursory</H4>
+<DL>
+  <DT><TT>rozdz06\JuzOtwarty</TT> 
+  <DD>Ilustruje powstanie błędu ORA-6511 
+  <DT><TT>rozdz06\BlednyFetch</TT> 
+  <DD>Ilustruje poprawne i niepoprawne użycie instrukcji FETCH 
+  <DT><TT>rozdz06\commit</TT> 
+  <DD>Wykonanie tego przykładu spowoduje powstanie błędu "ORA-1002: fetch out of 
+  sequence" z powodu wykonania instrukcji commit wewnątrz pętli SELECT...FOR 
+  UPDATE. 
+  <DT><TT>rozdz06\kursor1.pc</TT> 
+  <DD>Ten program Pro*C pokazuje zastosowanie zmiennych kursora. 
+  <DT><TT>rozdz06\kursor2.sql</TT> 
+  <DD>Procedura ilustruje zmienne kursora po stronie serwera. 
+  <DT><TT>rozdz06\PetlaKursora.sql</TT> 
+  <DD>Demonstruje jawną pętlę pobierania dla kursora 
+  <DT><TT>rozdz06\ExitWhen.sql</TT> 
+  <DD>Ilustruje niepoprawną lokalizację instrukcji EXIT WHEN 
+  <DT><TT>rozdz06\PetlaFor.sql</TT> 
+  <DD>Demonstruje pętlę FOR kursora 
+  <DT><TT>rozdz06\ForUpdate.sql</TT> 
+  <DD>Ilustruje kursor zawierający klauzulę FOR UPDATE 
+  <DT><TT>rozdz06\NiejawnyFOR.sql</TT> 
+  <DD>Demonstruje niejawną instrukcję FOR 
+  <DT><TT>rozdz06\NieZnalezionoDanych.sql</TT> 
+  <DD>Ilustruje powstanie wyjątku NO_DATA_FOUND 
+  <DT><TT>rozdz06\NoMatch.sql</TT> 
+  <DD>Iilustruje użycie atrybutów kursora dla niejawnego kursora SQL 
+  <DT><TT>rozdz06\Parametryzowane.sql</TT> 
+  <DD>Ilustruje zastosowanie kursora kursora z parametrami 
+  <DT><TT>rozdz06\RefCursor.sql</TT> 
+  <DD>Ilustruje kilka deklaracji REF CURSOR 
+  <DT><TT>rozdz06\ProstaPetla.sql</TT> 
+  <DD>Demonstruje prostą pętlę pobierania 
+  <DT><TT>rozdz06\PetlaWhile.sql</TT> 
+  <DD>Ilustruje pętlę pobierania kursora WHILE </DD></DL>
+<H4>Rozdział 7: Obsługa błędów</H4>
+<DL>
+  <DT><TT>rozdz07\ZdublProgObsl.sql</TT> 
+  <DD>Ilustruje powstawanie błędu PLS-483 
+  <DT><TT>rozdz07\DupValOnIndex.sql</TT> 
+  <DD>Ten przykład powoduje zgłoszenie wyjątku DUP_VAL_ON_INDEX 
+  <DT><TT>rozdz07\PakietObslBledow.sql</TT> 
+  <DD>Ilustruje pakiet z zaawansowaną obsługą błędów 
+  <DT><TT>rozdz07\ExceptionInit.sql</TT> 
+  <DD>ilustruje zastosowanie dyrektywy pragma EXCEPTION_INIT 
+  <DT><TT>rozdz07\NoDataFound.sql</TT> 
+  <DD>Ten blok powoduje zgłoszenie wyjątku NO_DATA_FOUND 
+  <DT><TT>rozdz07\PozaZakresem.sql</TT> 
+  <DD>Ilustruje zakres obowiązywania wyjątków 
+  <DT><TT>rozdz07\Zarejestruj.sql</TT> 
+  <DD>Procedura ilustruje zastosowanie funkcji RAISE_APPLICATION_ERROR. 
+  <DT><TT>rozdz07\SQLERRM.sql</TT> 
+  <DD>Pokazuje działanie funkcji SQLERRM 
+  <DT><TT>rozdz07\ZdefPrzezUzytk.sql</TT> 
+  <DD>Ilustruje wyjątki zdefiniowane przez użytkownika 
+  <DT><TT>rozdz07\BladWartosci.sql</TT> 
+  <DD>Powoduje zgłoszenie wyjątku VALUE_ERROR na dwa różne sposoby. </DD></DL>
+<H4>Rozdział 8: Kolekcje</H4>
+<DL>
+  <DT><TT>rozdz08\wywolaniaBiblioteka.sql</TT> 
+  <DD>Demonstruje wywołania procedur pakietu Biblioteka 
+  <DT><TT>rozdz08\kolekcjeDML.sql</TT> 
+  <DD>Ilustruje operacje DML dla tabeli zawierającej kolumny typu kolekcje 
+  <DT><TT>rozdz08\PetleKolekcji.sql</TT> 
+  <DD>Ilustruje użycie metod FIRST, LAST, NEXT oraz PRIOR 
+  <DT><TT>rozdz08\count.sql</TT> 
+  <DD>Ilustruje zastosowanie metody kolekcji COUNT 
+  <DT><TT>rozdz08\delete.sql</TT> 
+  <DD>Ilustruje zastosowanie metody kolekcji DELETE 
+  <DT><TT>rozdz08\exists.sql</TT> 
+  <DD>Ilustruje zastosowanie metody kolekcji EXISTS 
+  <DT><TT>rozdz08\extend.sql</TT> 
+  <DD>Ilustruje zastosowanie metody kolekcji EXTEND 
+  <DT><TT>rozdz08\extDel.sql</TT> 
+  <DD>Ilustruje interakcje pomiędzy metodami EXTEND i DELETE 
+  <DT><TT>rozdz08\indeksowane.sql</TT> 
+  <DD>Ilustruje tabele indeksowane 
+  <DT><TT>rozdz08\Biblioteka.sql</TT> 
+  <DD>Demonstruje działania dotyczące składowanych tabel zagnieżdżonych 
+  <DT><TT>rozdz08\BibliotekaOperator.sql</TT> 
+  <DD>Demonstruje użycie operatorów SQL dla składowanych tabel zagnieżdżonych 
+  <DT><TT>rozdz08\limit.sql</TT> 
+  <DD>Ilustruje zastosowanie metody kolekcji LIMIT 
+  <DT><TT>rozdz08\wielopoziomowe.sql</TT> 
+  <DD>Ilustruje użycie kolekcji wielopoziomowyuch 
+  <DT><TT>roazdz08\zagniezdzone.sql</TT> 
+  <DD>Ilustruje użycie tabel zagnieżdżonych 
+  <DT><TT>rozdz08\niesekwencyjne.sql</TT> 
+  <DD>Ilustruje operację wstawiania zagnieżdżonej tabeli do bazy danych 
+  <DT><TT>rozdz08\Tabelanull.sql</TT> 
+  <DD>Ilustruje zagnieżdżoną tabelę NULL 
+  <DT><TT>rozdz08\WyswietlObowiazkowe.sql</TT> 
+  <DD>Demonstruje użycie zapytania dla kolumn varray i zapisywanie danych do 
+  zmiennych PL/SQL 
+  <DT><TT>rozdz08\PrzypiszTab.sql</TT> 
+  <DD>Ilustruje powstawanie błędu ORA-6533 w przypadku działań z tabelami 
+  zagnieżdżonymi 
+  <DT><TT>rozdz08\TabelaObiektow.sql</TT> 
+  <DD>Demonstruje indeksowaną tabelę obiektów 
+  <DT><TT>rozdz08\TabelaRekordow.sql</TT> 
+  <DD>Demonstruje indeksowaną tabelę rekordów 
+  <DT><TT>rozdz08\Tkonstrukt.sql</TT> 
+  <DD>Pokazuje użycie konstruktorów tabel zagnieżdżonych 
+  <DT><TT>rozdz08\trim.sql</TT> 
+  <DD>Ilustruje zastosowanie metody kolekcji TRIM 
+  <DT><TT>rozdz08\LokalizacjaTypu.sql</TT> 
+  <DD>Ilustruje różne lokalizacje typów kolekcji 
+  <DT><TT>rozdz08\varray.sql</TT> 
+  <DD>Ilustruje deklaracje tablic varray 
+  <DT><TT>rozdz08\vPrzypisz.sql</TT> 
+  <DD>Ilustruje powstawanie błędów ORA-6532 i ORA-6533 przy wykonywaniu działań 
+  z tablicami varray 
+  <DT><TT>rozdz08\vKonstrukt.sql</TT> 
+  <DD>Ilustruje użycie konstruktorów tablic varray </DD></DL>
+<H4>Rozdział 9: Tworzenie procedur, funkcji i pakietów</H4>
+<DL>
+  <DT><TT>rozdz09\DodajNowegoStudenta.sql</TT> 
+  <DD>Demonstrujue składowaną procedurę i sposób jej wywołania 
+  <DT><TT>rozdz09\PrawieKomplet.sql</TT> 
+  <DD>Demonstruje funkcję składowaną 
+  <DT><TT>rozdz09\WywolajDNS.sql</TT> 
+  <DD>Ilustruje wywołanie procedury DodajNowegoStudenta 
+  <DT><TT>rozdz09\WywolaniaGR.sql</TT> 
+  <DD>Demonstruje wywołanie funkcji PakietGrupy.ListaGrupy 
+  <DT><TT>rozdz09\WywolanieFunkc.sql</TT> 
+  <DD>Pokazuje sposób wywoływania funkcji składowanej 
+  <DT><TT>rozdz09\WywolajMnie.sql</TT> 
+  <DD>Demonstruje notację pozycyjną i imienną 
+  <DT><TT>rozdz09\WywolanieMT.sql</TT> 
+  <DD>Pokazuje wywołania procedury TestTryb 
+  <DT><TT>rozdz09\DaneGrupy.sql</TT> 
+  <DD>Ilustruje użycie instrukcji RETURN 
+  <DT><TT>rozdz09\PakietGrupy.sql</TT> 
+  <DD>Demonstruje użycie pakietu 
+  <DT><TT>rozdz09\PakietGrupy2.sql</TT> 
+  <DD>Demonstruje pakiet z dodatkową procedurą w treści pakietu 
+  <DT><TT>rozdz09\SzybkieKopiowanie.sql</TT> 
+  <DD>Ten pakiet prezentuje zwiększenie wydajności dzięki modyfikatorowi NOCOPY 
+  wprowadzonemu w systemie 8<I>i</I> 
+  <DT><TT>rozdz09\TestDomyslny.sql</TT> 
+  <DD>Ilustruje zastosowanie parametrów domyślnych 
+  <DT><TT>rozdz09\TestDomyslny.sql</TT> 
+  <DD>Ilustruje różne sposoby wywoływania procedur z parametrami domyślnymi 
+  <DT><TT>rozdz09\TestTryb.sql</TT> 
+  <DD>Ilustruje różne tryby parametrów oraz przypisania do parametrów 
+  <DT><TT>rozdz09\TestNoCopy.sql</TT> 
+  <DD>Ilustruje działanie modyfikatora NOCOPY 
+  <DT><TT>rozdz09\BezParametrow.sql</TT> 
+  <DD>Ilustruje Podprogramy składowane bez parametrów 
+  <DT><TT>rozdz09\PrzeciazanieObiektow.sql</TT> 
+  <DD>Ilustruje przeciążanie podprogramów w pakietach wykorzystujących typy 
+  obiektowe. 
+  <DT><TT>rozdz09\Przeciazanie.sql</TT> 
+  <DD>Ilustruje zastosowanie przeciążonych podprogramów w pakietach 
+  <DT><TT>rozdz09\BaladPakietu.sql</TT> 
+  <DD>Ilustruje błędy kompilacji w pakietach 
+  <DT><TT>rozdz09\DlugoscParametrow.sql</TT> 
+  <DD>Ilustruje efekt ograniczeń dotyczących parametrów formalnych 
+  <DT><TT>rozdz09\ZglosBlad.sql</TT> 
+  <DD>Ilustruje działanie nieobsłużonych wyjątków i zmiennych wyjściowych 
+  <DT><TT>rozdz09\Losowe.sql</TT> 
+  <DD>Ilustruje sekcję inicjalizacji pakietu </DD></DL>
+<H4>Rozdział 10: Zastosowanie procedur, funkcji i pakietów</H4>
+<DL>
+  <DT><TT>rozdz10\ZaleznosciAnonimowe.sql</TT> 
+  <DD>Pokazuje zależności pomiędzy anonimowym blokiem, a stanem wykonywania 
+  pakietu 
+  <DT><TT>rozdz10\WywolajCzytStud.sql</TT> 
+  <DD>Ilustruje wywołanie procedury TrwaloscPakietu.CzytajStudentow 
+  <DT><TT>rozdz10\DefaultPragma.sql</TT> 
+  <DD>Ilustruje wykorzystanie słowa kluczowego DEFAULT w wywołaniu dyrektywy 
+  pragma RESTRICT_REFERENCES. 
+  <DT><TT>rozdz10\Zaleznosci.sql</TT> 
+  <DD>Ilustruje zależności pomiędzy pakietami, a innymi obiektami 
+  <DT><TT>rozdz10\UaktualnijDML.sql</TT> 
+  <DD>Prezentuje funkcję, którą można wywołać z instrukcji DML w systemie 
+  Oracle8i 
+  <DT><TT>rozdz10\Wykonaj.out</TT> 
+  <DD>Wynik działania skryptu <TT>Wykonaj.sql</TT> 
+  <DT><TT>rozdz10\Wykonaj.sql</TT> 
+  <DD>Demonstruje działanie uprawnienia systemowego EXECUTE 
+  <DT><TT>rozdz10\DeklaracjeWyprzedzajace.sql</TT> 
+  <DD>Ilustruje deklaracje wyprzedzające 
+  <DT><TT>rozdz10\ImieNazwisko.sql</TT> 
+  <DD>Pokazuje funkcję, którą można wywołać z instrukcji SQL 
+  <DT><TT>rozdz10\WstawTymcz.sql</TT> 
+  <DD>Funkcja, której nie można wywołać z instrukcji SQL 
+  <DT><TT>rozdz10\Wywolujace.out</TT> 
+  <DD>Wynik działania skryptu <TT>Wywolujace.sql</TT> 
+  <DT><TT>rozdz10\Wywolujace.sql</TT> 
+  <DD>Demonstruje działanie procedur z uprawnieniami wywołującego 
+  <DT><TT>rozdz10\BladLokalny.sql</TT> 
+  <DD>Ilustruje nieprawidłowe położenie lokalnego podprogramu 
+  <DT><TT>rozdz10\LokalnySklad.sql</TT> 
+  <DD>Ilustruje lokalny podprogram wewnątrz podprogramu składowanego 
+  <DT><TT>rozdz10\PodprLokalny.sql</TT> 
+  <DD>Ilustruje lokalny podprogram wewnątrz anonimowego bloku 
+  <DT><TT>rozdz10\Wzajemne.sql</TT> 
+  <DD>Demonstruje wzajemnie wykluczające się podprogramy lokalne 
+  <DT><TT>rozdz10\Przeciazone.sql</TT> 
+  <DD>Demonstruje zastosowanie dyrektywy pragma RESTRICT_REFERENCES z 
+  przeciążonymi podprogramami. 
+  <DT><TT>rozdz10\PrzeciazoneLokalne.sql</TT> 
+  <DD>Pokazuje przeciążone podprogramy lokalne 
+  <DT><TT>rozdz10\TrwaloscPakietu.sql</TT> 
+  <DD>Ilustruje trwałość zmiennych zadeklarowanych w pakiecie 
+  <DT><TT>rozdz10\TrwaloscPakietu2.sql</TT> 
+  <DD>Wersja pakietu <TT>TrwaloscPakietu</TT> przeznaczona do seryjnego 
+  wykorzystania 
+  <DT><TT>rozdz10\ZarejestrujPelneGrupy.sql</TT> 
+  <DD>Procedura ilustruje zależności pomiędzy obiektami składowanymi 
+  <DT><TT>rozdz10\ZaleznosciZdalne.sql</TT> 
+  <DD>Ilustruje zależności pomiędzy obiektami w różnych bazach danych 
+  <DT><TT>rozdz10\StudentOps.sql</TT> 
+  <DD>Pakiet, w którym wykorzystano dyrektywę pragma RESTRICT_REFERENCES 
+  <DT><TT>rozdz10\StudentOps2.sql</TT> 
+  <DD>Pakiet <TT>StudentOps</TT> bez dyrektywy pragma 
+  <DT><TT>rozdz10\TrustPkt.sql</TT> 
+  <DD>Ilustruje wykorzystanie słowa kluczowego TRUST w wywołaniu dyrektywy 
+  pragma RESTRICT_REFERENCES. </DD></DL>
+<H4>Rozdział 11: Wyzwalacze</H4>
+<DL>
+  <DT><TT>rozdz11\KaskadaZSInsert.sql</TT> 
+  <DD>Implementacja konstrukcji INSERT CASCADE 
+  <DT><TT>rozdz11\GrupyPokojeZamiast.sql</TT> 
+  <DD>Ilustracja wyzwalacza zastępującego 
+  <DT><TT>rozdz11\SchematBazyDanych.sql</TT> 
+  <DD>Demonstruje wyzwalacze systemowe bazy danych i schematu 
+  <DT><TT>rozdz11\KolejnoscUruchamiania.sql</TT> 
+  <DD>Demonstruje kolejność uruchamiania wyzwalaczy DML 
+  <DT><TT>rozdz11\WygenertujIDStudenta.sql</TT> 
+  <DD>Prezentuje zastosowanie identyfikatora korelacji :new 
+  <DT><TT>rozdz11\Zamiast.sql</TT> 
+  <DD>Przykład wyzwalacza zastępującego w systemie Oracle8 
+  <DT><TT>rozdz11\OgraniczSpec.sql</TT> 
+  <DD>Ilustruje powstawanie błędu mutacji tabel ORA-4091 
+  <DT><TT>rozdz11\RejestrowaniePolaczen.sql</TT> 
+  <DD>Ilustruje składnię wyzwalacza CALL systemu Oracle 8<I>i</I> 
+  <DT><TT>rozdz11\ZarejestrujOperTworzenia.sql</TT> 
+  <DD>Przykład wyzwalacza systemowego w systemie Oracle8<I>i</I> 
+  <DT><TT>rozdz11\ZarejestrujBledy.sql</TT> 
+  <DD>Demonstruje wyzwalacz SERVERERROR 
+  <DT><TT>rozdz11\rejestrator.java</TT> 
+  <DD>Kod w języku Java pakietu <TT>PakietDziennika2</TT> 
+  <DT><TT>rozdz11\PakietDziennika1.sql</TT> 
+  <DD>Pakiet PL/SQL rejestrujący połączenia i rozłączenia z bazą danych 
+  <DT><TT>rozdz11\PakietDziennika2.sql</TT> 
+  <DD>To samo, co <TT>PakietDziennika1</TT>, ale treść pakietu w Javie 
+  <DT><TT>rozdz11\RejestrujZmianyZS.sql</TT> 
+  <DD>Prezentuje predykaty wyzwalacza 
+  <DT><TT>rozdz11\mutujace.sql</TT> 
+  <DD>Pokazuje rozwiązanie problemu błędu mutujących tabel ORA-4091 
+  <DT><TT>rozdz11\Pseudorekordy.sql</TT> 
+  <DD>Pokazuje, że <TT>:old</TT> oraz <TT>:new</TT> to pseudorekordy 
+  <DT><TT>rozdz11\TeSameNazwy.sql</TT> 
+  <DD>Prezentuje przestrzenie nazw wyzwalaczy 
+  <DT><TT>rozdz11\UaktualnijSpecStats.sql</TT> 
+  <DD>Przykład wyzwalacza DML </DD></DL>
+<H4>Rozdział 12: Zaawansowane właściwości</H4>
+<DL>
+  <DT><TT>rozdz12\OdbiorOstrz.sql</TT> 
+  <DD>Pokazuje odbieranie ostrzeżeń za pomocą pakietu DBMS_ALERT 
+  <DT><TT>rozdz12\WysylkaOstrz.sql</TT> 
+  <DD>Pokazuje wysyłanie ostrzeżenia za pomocą pakietu DBMS_ALERT. 
+  <DT><TT>rozdz12\BULK_COLLECT.sql</TT> 
+  <DD>Pokazuje kilka różnych instrukcji BULK_COLLECT 
+  <DT><TT>rozdz12\DBMS_JOB.sql</TT> 
+  <DD>Pokazuje pakiet DBMS_JOB 
+  <DT><TT>rozdz12\DBMS_LOB.sql</TT> 
+  <DD>Pokazuje pakiet DBMS_LOB 
+  <DT><TT>rozdz12\DynamicznyDML.sql</TT> 
+  <DD>Demonstruje zastosowanie pakietu DBMS_SQL 
+  <DT><TT>rozdz12\execDowiazane.sql</TT> 
+  <DD>Demonstruje zastosowanie klauzuli USING z frazą EXECUTE IMMEDIATE w celu 
+  obsługi zmiennych dowiązanych 
+  <DT><TT>rozdz12\execImmediate.sql</TT> 
+  <DD>Prezentuje kilka poleceń EXECUTE IMMEDIATE 
+  <DT><TT>rozdz12\FORALL.sql</TT> 
+  <DD>pokazuje kilka różnych instrukcji FORALL 
+  <DT><TT>rozdz12\LOB_DML.sql</TT> 
+  <DD>Pokazuje sposób wykonania kilku operacji z obiektami LOB za pomocą 
+  instrukcji DML. 
+  <DT><TT>rozdz12\WbudowDynamic.sql</TT> 
+  <DD>Ilustruje zastosowanie wbudowanego dynamicznego SQL do przetwarzania 
+  zapytań 
+  <DT><TT>rozdz12\potokowe.sql</TT> 
+  <DD>Przykład potokowych funkcji tabel 
+  <DT><TT>rozdz12\OdbiorPotok.sql</TT> 
+  <DD>Pokazuje użycie pakietu DBMS_PIPE do otrzymywania wiadomości 
+  <DT><TT>rozdz12\WysylkaPotok.sql</TT> 
+  <DD>Pokazuje użycie pakietu DBMS_PIPE do wysyłania wiadomości 
+  <DT><TT>rozdz12\Punkt.sql</TT> 
+  <DD>Przykład typu obiektowego 
+  <DT><TT>rozdz12\PunktSQL.sql</TT> 
+  <DD>Ten skrypt demonstruje użycie operacji SQL dla typów obiektowych 
+  <DT><TT>rozdz12\UTL_FILE.sql</TT> 
+  <DD>Demonstruje zastosowanie pakietu UTL_FILE 
+  <DT><TT>rozdz12\UTL_HTTP.sql</TT> 
+  <DD>Pokazuje zastosowanie pakietu UTL_HTTP 
+  <DT><TT>rozdz12\UTL_INADDR.sql</TT> 
+  <DD>Pokazuje zastosowanie pakietu UTL_INADDR 
+  <DT><TT>rozdz12\UTL_SMTP.sql</TT> 
+  <DD>Demonstruje zastosowanie pakietu UTL_SMTP 
+  <DT><TT>rozdz12\UTL_TCP.sql</TT> 
+  <DD>Pokazuje zastosowanie pakietu UTL_TCP </DD></DL></BODY></HTML>

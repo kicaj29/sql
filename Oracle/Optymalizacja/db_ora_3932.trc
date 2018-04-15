@@ -1,0 +1,94 @@
+Dump file c:\oracle\admin\db\udump\db_ora_3932.trc
+Wed Mar 15 19:56:44 2006
+ORACLE V9.2.0.1.0 - Production vsnsta=0
+vsnsql=12 vsnxtr=3
+Windows 2000 Version 5.1 Dodatek Service Pack 2, CPU type 586
+Oracle9i Enterprise Edition Release 9.2.0.1.0 - Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.1.0 - Production
+Windows 2000 Version 5.1 Dodatek Service Pack 2, CPU type 586
+Instance name: db
+
+Redo thread mounted by this instance: 1
+
+Oracle process number: 13
+
+Windows thread id: 3932, image: ORACLE.EXE
+
+
+*** 2006-03-15 19:56:44.000
+*** SESSION ID:(9.10667) 2006-03-15 19:56:44.000
+APPNAME mod='PL/SQL Developer' mh=1190136663 act='SQL Window - œledzenieSesja1.sql' ah=178722267
+=====================
+PARSING IN CURSOR #1 len=35 dep=0 uid=0 oct=42 lid=0 tim=271806992171 hv=2767092717 ad='667bad78'
+alter session set sql_trace = true
+END OF STMT
+EXEC #1:c=0,e=31877,p=0,cr=0,cu=0,mis=1,r=0,dep=0,og=4,tim=271806953361
+=====================
+PARSING IN CURSOR #2 len=61 dep=0 uid=0 oct=47 lid=0 tim=271807292673 hv=3517412409 ad='66f4f3fc'
+begin :id := sys.dbms_transaction.local_transaction_id; end;
+END OF STMT
+PARSE #2:c=0,e=512,p=0,cr=0,cu=0,mis=1,r=0,dep=0,og=0,tim=271807292668
+EXEC #2:c=0,e=3000,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=4,tim=271807297085
+=====================
+PARSING IN CURSOR #3 len=80 dep=0 uid=0 oct=47 lid=0 tim=271807299575 hv=2945328064 ad='66f4d2b4'
+begin
+  sys.dbms_output.get_lines(lines => :lines, numlines => :numlines);
+end;
+END OF STMT
+PARSE #3:c=15625,e=602,p=0,cr=0,cu=0,mis=1,r=0,dep=0,og=0,tim=271807299570
+EXEC #3:c=0,e=72863,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=4,tim=271807375158
+*** 2006-03-15 19:57:42.000
+=====================
+PARSING IN CURSOR #3 len=21 dep=0 uid=0 oct=3 lid=0 tim=271865490588 hv=2888538493 ad='66ec0b70'
+select 'x' from dual
+END OF STMT
+PARSE #3:c=0,e=65923,p=0,cr=0,cu=0,mis=1,r=0,dep=0,og=4,tim=271865490581
+EXEC #3:c=0,e=16850,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=4,tim=271865509765
+FETCH #3:c=0,e=65,p=0,cr=3,cu=0,mis=0,r=1,dep=0,og=4,tim=271865510918
+=====================
+PARSING IN CURSOR #4 len=116 dep=1 uid=0 oct=3 lid=0 tim=271865531257 hv=189272129 ad='67319410'
+select o.owner#,o.name,o.namespace,o.remoteowner,o.linkname,o.subname,o.dataobj#,o.flags from obj$ o where o.obj#=:1
+END OF STMT
+PARSE #4:c=0,e=19548,p=0,cr=0,cu=0,mis=1,r=0,dep=1,og=0,tim=271865531249
+EXEC #4:c=0,e=230,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=4,tim=271865532952
+FETCH #4:c=0,e=38,p=0,cr=3,cu=0,mis=0,r=1,dep=1,og=4,tim=271865533635
+STAT #3 id=1 cnt=1 pid=0 pos=1 obj=222 op='TABLE ACCESS FULL DUAL '
+=====================
+PARSING IN CURSOR #3 len=114 dep=0 uid=0 oct=47 lid=0 tim=271865544362 hv=2628502993 ad='66f604ec'
+begin
+  if :enable = 0 then
+    sys.dbms_output.disable;
+  else
+    sys.dbms_output.enable(:size);
+  end if;
+end;
+END OF STMT
+PARSE #3:c=0,e=636,p=0,cr=0,cu=0,mis=1,r=0,dep=0,og=0,tim=271865544357
+EXEC #3:c=0,e=13925,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=4,tim=271865561349
+=====================
+PARSING IN CURSOR #1 len=30 dep=0 uid=0 oct=3 lid=0 tim=271865569267 hv=916065928 ad='667b029c'
+select * from tabelatestindex
+END OF STMT
+PARSE #1:c=0,e=399,p=0,cr=0,cu=0,mis=1,r=0,dep=0,og=4,tim=271865569260
+EXEC #1:c=0,e=34,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=4,tim=271865571597
+FETCH #1:c=0,e=66,p=0,cr=3,cu=0,mis=0,r=1,dep=0,og=4,tim=271865572349
+=====================
+PARSING IN CURSOR #3 len=30 dep=0 uid=0 oct=3 lid=0 tim=271865573891 hv=720832586 ad='667b1754'
+SELECT * FROM tabelatestindex
+END OF STMT
+PARSE #3:c=0,e=360,p=0,cr=0,cu=0,mis=1,r=0,dep=0,og=4,tim=271865573885
+=====================
+PARSING IN CURSOR #2 len=61 dep=0 uid=0 oct=47 lid=0 tim=271865598813 hv=3517412409 ad='66f4f3fc'
+begin :id := sys.dbms_transaction.local_transaction_id; end;
+END OF STMT
+PARSE #2:c=0,e=170,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=4,tim=271865598808
+EXEC #2:c=0,e=129,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=4,tim=271865601121
+=====================
+PARSING IN CURSOR #3 len=80 dep=0 uid=0 oct=47 lid=0 tim=271865602474 hv=2945328064 ad='66f4d2b4'
+begin
+  sys.dbms_output.get_lines(lines => :lines, numlines => :numlines);
+end;
+END OF STMT
+PARSE #3:c=0,e=153,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=4,tim=271865602471
+EXEC #3:c=0,e=141,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=4,tim=271865604239

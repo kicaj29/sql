@@ -1,0 +1,73 @@
+
+<p><b><font face="Arial, Tahoma" size="4">ORDERS INFORMATION:
+</font></b></p>
+
+<HTML>
+
+<HEAD><TITLE>Orders</TITLE></HEAD>
+
+
+<BODY>
+
+
+<TABLE BORDER>
+
+
+<TR>
+
+
+<TH>Order ID</TH>
+
+
+<TH>Order Mode</TH>
+
+
+<TH>Customer ID</TH>
+
+
+<TH>Order Status</TH>
+
+
+<TH>Order Total</TH>
+
+
+<TH>Tax</TH>
+
+
+<TH>Sales Rep ID</TH>
+
+
+</TR>
+
+<% for item in () loop %>
+
+
+<TD><%= item.order_id %></TD>
+
+
+<TD><%= item.order_mode %></TD>
+
+
+<TD><%= item.customer_id %></TD>
+
+
+<TD><%= item.order_status %></TD>
+
+
+<TD><%= item.order_total %></TD>
+
+<TD><%= item.tax %></TD>
+
+<TD><%= item.sales_rep_id %></TD>
+
+
+</TR>
+
+
+<% end loop; %>
+
+
+</BODY>
+
+
+</HTML>

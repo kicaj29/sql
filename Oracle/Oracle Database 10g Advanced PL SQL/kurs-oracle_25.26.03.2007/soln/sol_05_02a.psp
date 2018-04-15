@@ -1,0 +1,49 @@
+<%@ page language="PL/SQL" %>
+
+<%@ plsql procedure="show_cust" %>
+
+<%@ plsql parameter="custid" type="NUMBER" default="101" %>
+
+<HTML>
+
+<HEAD><TITLE>Customer Details</TITLE></HEAD>
+
+<BODY>
+<p>Following are the details for the Customer ID <%= custid %>
+
+<TABLE BORDER>
+
+<TR>
+
+<TH>ID</TH>
+
+<TH>First Name</TH>
+
+<TH>Last Name</TH>
+
+<TH>Credit Limit</TH>
+
+<TH>EMail</TH>
+</TR>
+
+<%
+
+for item in (select * from customers where customer_id = custid) loop
+
+%>
+
+<TD><BIG><%= item.customer_id %></BIG></TD>
+
+<TD><BIG><%= item.cust_first_name %></BIG></TD>
+
+<TD><BIG><%= item.cust_last_name %></BIG></TD>
+
+<TD><BIG><%= item.credit_limit %></BIG></TD>
+
+<TD><BIG><%= item.cust_email %></BIG></TD>
+
+<% end loop; %>
+
+</BODY>
+
+</HTML>	

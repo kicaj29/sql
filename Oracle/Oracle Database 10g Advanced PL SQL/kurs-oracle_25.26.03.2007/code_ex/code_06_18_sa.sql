@@ -1,0 +1,15 @@
+CONNECT /as sysdba
+
+DECLARE
+BEGIN
+  DBMS_RLS.ADD_POLICY (
+   'OE', 
+   'CUSTOMERS', 
+   'OE_ACCESS_POLICY', 
+   'OE', 
+   'ORDERS_APP_PKG.THE_PREDICATE', 
+   'SELECT, UPDATE, DELETE', 
+   FALSE, 
+   TRUE);
+END define_the_policy;
+/
