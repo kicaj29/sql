@@ -1,0 +1,5 @@
+﻿CREATE TABLE [Schema1].[Table1]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(50) NULL
+)
