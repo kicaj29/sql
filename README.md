@@ -36,4 +36,7 @@ Next the *sql cmd variables* can be use in sql files, for example:
 insert into [Schema1].[Versions] 
 ([Id], [DacName], [DacVersion], [DateTimeUtc], [Action])
 values (1, N'$(SqlDacName)', N'$(SqlDacVersion)', GETUTCDATE(), N'PostDeploy');
-```
+```   
+
+https://dba.stackexchange.com/questions/114332/why-is-r-sqlcmd-command-marked-as-wrong-in-post-deployment-script    
+http://geekswithblogs.net/tonyt/archive/2010/03/05/138363.aspx   
