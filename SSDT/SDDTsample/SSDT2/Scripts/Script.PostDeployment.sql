@@ -10,9 +10,7 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r C:\GitHub\kicaj29\sql\SSDT\SDDTsample\SSDT1\Scripts\Script.PostDeployment.sql
-
-:r ..\SSDT1\Scripts\Script.PostDeployment.sql
+:r ..\..\SSDT1\Scripts\Script.PostDeployment.sql
 
 insert into [Schema1].[Versions] 
 ([DacName], [DacVersion], [DateTimeUtc], [Action])

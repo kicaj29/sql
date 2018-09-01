@@ -10,6 +10,7 @@
 --------------------------------------------------------------------------------------
 */
 
+:r ..\..\SSDT1\Scripts\Script.PreDeployment.sql
 
   IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'[Schema1].[Versions]') AND type = N'U')
   BEGIN
