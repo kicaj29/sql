@@ -52,7 +52,7 @@ Workaround is to reference them in the pre-deployment and pos-deployment directl
 The path starts from the file in which *:r* is used.
 To avoid misleadining errors in VS *SQLCMD* mode has to be enabled.
 
-![sqlcmd mode](.\screens\enableSQLCMDmode.png)
+![sqlcmd mode](./screens/enableSQLCMDmode.png)
 
 #### Reference to dacpac
 *SSDT3refToDacpac.sqlproj* shows to reference *dacpac* file.
