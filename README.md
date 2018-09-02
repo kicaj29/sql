@@ -60,4 +60,4 @@ To avoid misleadining errors in VS *SQLCMD* mode has to be enabled.
 
 NOTE: in case of referencing *dacpacs* there is no easy workaround for issue with not executing pre-deployment and post-deployment scripts from the referenced *dacpacs*. One possibility is to unzip referenced *dacpacs* and copy their pre-deployment and post-deployment script to some folder in the *sqlproj* that is on the top (root). Next they can be referenced using option *:r* in the root *sqlproj*.
 
-#### SSDT in nugets
+### SSDT in nugets
