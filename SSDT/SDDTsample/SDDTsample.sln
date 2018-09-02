@@ -9,6 +9,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SSDT1", "SSDT1\SSDT1.sqlpro
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SSDT2", "SSDT2\SSDT2.sqlproj", "{68BC77CE-8CFD-487C-99FB-1B7AEDECE7E1}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SSDT3refToDacpac", "SSDT3refToDacpac\SSDT3refToDacpac.sqlproj", "{8A5CD247-C8E6-4A7A-AB78-B0146873F004}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,12 @@ Global
 		{68BC77CE-8CFD-487C-99FB-1B7AEDECE7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68BC77CE-8CFD-487C-99FB-1B7AEDECE7E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68BC77CE-8CFD-487C-99FB-1B7AEDECE7E1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8A5CD247-C8E6-4A7A-AB78-B0146873F004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A5CD247-C8E6-4A7A-AB78-B0146873F004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A5CD247-C8E6-4A7A-AB78-B0146873F004}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8A5CD247-C8E6-4A7A-AB78-B0146873F004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A5CD247-C8E6-4A7A-AB78-B0146873F004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A5CD247-C8E6-4A7A-AB78-B0146873F004}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
