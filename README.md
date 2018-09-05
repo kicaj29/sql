@@ -69,7 +69,7 @@ NOTE: *Without this option set the source project will be deployed without the r
 
 #### Reference to dacpac
 *SSDT3refToDacpac.sqlproj* shows to reference *dacpac* file.
-*Dacpac* file is out of *sqlproj* compilation.
+*Dacpac* file is output of *sqlproj* compilation.
 
 NOTE: in case of referencing *dacpacs* there is no easy workaround for issue with not executing pre-deployment and post-deployment scripts from the referenced *dacpacs* in case of using option *Include composite objects*.   
 
