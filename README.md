@@ -50,7 +50,7 @@ Option *Include composite objects* is set in publish file **.publish.xml*. By de
 
 In case SSDT2 has reference to SSDT1 then publish of SSDT2 first will execute publish of SSDT1. The mechanism checks reference tree. Publication on root *sqlproj* will start publish from the leaves *sqlprojs* up to the root *sqlproj*.   
 
-NOTE: there is one drawback in this mechanism. Pre-deployment and pos-deployment scripts from the referenced projects are not executed!.
+NOTE: there is one **drawback** in this mechanism. **Pre-deployment and pos-deployment scripts from the referenced projects are not executed!**.
 Workaround is to reference them in the pre-deployment and pos-deployment directly using *:r* syntax.
 
 ```
@@ -71,4 +71,8 @@ NOTE: *Without this option set the source project will be deployed without the r
 *SSDT3refToDacpac.sqlproj* shows to reference *dacpac* file.
 *Dacpac* file is out of *sqlproj* compilation.
 
-NOTE: in case of referencing *dacpacs* there is no easy workaround for issue with not executing pre-deployment and post-deployment scripts from the referenced *dacpacs*. One possibility is to unzip referenced *dacpacs* and copy their pre-deployment and post-deployment script to some folder in the *sqlproj* that is on the top (root). Next they can be referenced using option *:r* in the root *sqlproj*.
+NOTE: in case of referencing *dacpacs* there is no easy workaround for issue with not executing pre-deployment and post-deployment scripts from the referenced *dacpacs* in case of using option *Include composite objects*.   
+
+One possibility is to unzip referenced *dacpacs* and copy their pre-deployment and post-deployment script to some folder in the *sqlproj* that is on the top (root). Next they can be referenced using option *:r* in the root *sqlproj*.   
+
+Another way is to **do not use** *Include composite objects* option and run every *sqlproj*/*dacpac* individually. In this case it is wise to take care that all *sqlproj*/*dacpac* will be executed in one transaction so in case of some errors the whole published will be rolled-back and there will not be a need to restore database from backup files.
