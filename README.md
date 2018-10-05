@@ -37,6 +37,17 @@ insert into [Schema1].[Versions]
 ([Id], [DacName], [DacVersion], [DateTimeUtc], [Action])
 values (1, N'$(SqlDacName)', N'$(SqlDacVersion)', GETUTCDATE(), N'PostDeploy');
 ```   
+
+NOTE: the problem with *sql cmd variables* is that they have empty values in dacpac file, values from sqlproj properties are not preserved!.
+
+model.xml (after extracing it from the dacpac file)
+```
+<CustomData Category="SqlCmdVariables" Type="SqlCmdVariable">
+	<Metadata Name="SqlDacName" Value="" />
+	<Metadata Name="SqlDacVersion" Value="" />
+</CustomData>
+```
+
 ### How to reference between *sqlproj* files
 In order to reference one *sqlproj* in another *sqlproj* a *database reference* has to be added.   
 
