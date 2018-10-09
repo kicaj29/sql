@@ -1,12 +1,12 @@
 /*
-Dirty read occurs wherein one transaction is changing the tuple/record, 
+Dirty read occurs when one transaction is changing the tuple/record, 
 and a second transaction can read this tuple/record before the original change has been committed or rolled back. 
 This is known as a dirty read scenario because there is always the possibility that the first transaction may rollback the change,
 resulting in the second transaction having read an invalid value. 
 */
 
 /*
-Non Repeatable Reads happen when in a same transaction same query yields different results. 
+Non Repeatable Reads happen when in a the same transaction same query yields different results. 
 This happens when another transaction updates the data returned by other transaction.
 This is not case when we deal with new rows! For new rows we have phantom read definition.
 I think it is also case when in the second transaction we delete row and the second select from the first transaction
@@ -23,6 +23,8 @@ So this is case when we have to deal with new rows!
 /*LINKS: 
 http://en.wikipedia.org/wiki/Isolation_%28database_systems%29#Serializable
 https://msdn.microsoft.com/en-us/library/ms378149%28v=sql.110%29.aspx
+https://blog.sqlauthority.com/2015/07/03/sql-server-difference-between-read-committed-snapshot-and-snapshot-isolation-level/
+https://docs.microsoft.com/en-us/sql/t-sql/statements/set-transaction-isolation-level-transact-sql?view=sql-server-2017
 */
 
 
@@ -69,10 +71,10 @@ COMMIT TRANSACTION;
 
 --NON REPEATABLE READ: it occures if we set isolation level for this transaction on Read uncommitted or Read committed
 
-SET TRANSACTION ISOLATION LEVEL READ COMMITTED --, Repeatable read												
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED --Repeatable read
 go
 BEGIN TRANSACTION;
-select * from t2 where id = 1	--1. read thre row (col1 should be aaa)
+select * from t2 where id = 1	--1. read the row (col1 should be aaa)
 select * from t2 where id = 2   --read row that will be deleted
 
 WAITFOR DELAY '00:00:05'		--we need wait a few seconds here to have enough time to update the record and commit it in the second session
@@ -99,3 +101,39 @@ select * from t2 where age between 20 and 30	--3. should return three rows 2 old
 												--NOTE: if we delete row in the second transaction we will see this record in this step if we used at least Repeatable read isolation level
 												--it looks that repeatable read preserves rows in current transaction deleted by another transaction!
 commit transaction
+
+----Snapshot Isolation Level----
+--It is like Repeatable read but it does not block reading if antoher transaction is not finished
+
+SET TRANSACTION ISOLATION LEVEL Repeatable read
+go
+BEGIN TRANSACTION;
+select * from t2 where age between 20 and 30	--2. it will be blocked untile second transaction is finished
+commit
+
+--First we have to make sure that it is possible to use this isolation level
+ALTER DATABASE TestDB SET AllOW_SNAPSHOT_ISOLATION ON
+
+SET TRANSACTION ISOLATION LEVEL SNAPSHOT
+go
+BEGIN TRANSACTION;
+select * from t2 where age between 20 and 30	--2. it will NOT be blocked and we will not see not commited data
+
+select * from t2 where age between 20 and 30    --4.  it will NOT be blocked and we will not see not commited data
+
+commit --5. commit
+
+SET TRANSACTION ISOLATION LEVEL SNAPSHOT
+go
+BEGIN TRANSACTION;
+select * from t2 where age between 20 and 30	--6. now we will see new record
+commit
+
+----Serializable---
+--No other transactions can modify data that has been read by the current transaction until the current transaction completes.
+--Reading rows lock them for other transactions!!!
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+go
+BEGIN TRANSACTION; --1. begin tran, read the row
+select * from t2 where id = 1
+commit --3. commit, after this update in second transaction will be executed
