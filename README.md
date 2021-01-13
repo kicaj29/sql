@@ -1,8 +1,5 @@
-# sql
-sql examples
-
-## SSDT
-### How to add SqlCmdVariable in sqlproj file
+# SSDT
+## How to add SqlCmdVariable in sqlproj file
 The following example shows how to add SqlCmdVariable that are set on values stored in Data-tier Application properties.   
 
 ```
@@ -48,12 +45,12 @@ model.xml (after extracing it from the dacpac file)
 </CustomData>
 ```
 
-### How to reference between *sqlproj* files
+## How to reference between *sqlproj* files
 In order to reference one *sqlproj* in another *sqlproj* a *database reference* has to be added.   
 
-#### Publish order
+### Publish order
 
-##### Use *Include composite objects*
+#### Use *Include composite objects*
 
 Option *Include composite objects* is set in publish file **.publish.xml*. By default it is enabled.
 
@@ -72,13 +69,13 @@ To avoid misleadining errors in VS *SQLCMD* mode has to be enabled.
 
 ![sqlcmd mode](./screens/enableSQLCMDmode.png)
 
-##### Do not use *Include composite objects*
+#### Do not use *Include composite objects*
 
 In case this option is not used then all *sqlprojs* has to be executed explicitly in proper order.   
 
 NOTE: *Without this option set the source project will be deployed without the referenced projects or dacpacs.  If you deploy to an existing database and forget to set this option but have set options to delete objects in the target that are not in the source, you risk deleting important content from the database.  Schema Compare will highlight such delete actions very clearly, but it will be less obvious in Publish and will happen silently in Debug/Deploy.  Be careful!* [more here](https://blogs.msdn.microsoft.com/ssdt/2012/06/26/composite-projects-and-schema-compare/)
 
-#### Reference to dacpac
+### Reference to dacpac
 *SSDT3refToDacpac.sqlproj* shows to reference *dacpac* file.
 *Dacpac* file is output of *sqlproj* compilation.
 
@@ -87,3 +84,9 @@ NOTE: in case of referencing *dacpacs* there is no easy workaround for issue wit
 One possibility is to unzip referenced *dacpacs* and copy their pre-deployment and post-deployment script to some folder in the *sqlproj* that is on the top (root). Next they can be referenced using option *:r* in the root *sqlproj*.   
 
 Another way is to **do not use** *Include composite objects* option and run every *sqlproj*/*dacpac* individually. In this case it is wise to take care that all *sqlproj*/*dacpac* will be executed in one transaction so in case of some errors the whole published will be rolled-back and there will not be a need to restore database from backup files.
+
+# How to connect from SQL Mgmt Studio to localDB
+
+In ```Server name``` input type: (LocalDB)\v11.0, (LocalDB)\.  (if ended by dot it will connect to default localDB)
+
+![001-localDB-connect.png](images/001-localDB-connect.png)
