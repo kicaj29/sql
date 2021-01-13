@@ -1,3 +1,12 @@
+- [SSDT](#ssdt)
+  * [How to add SqlCmdVariable in sqlproj file](#how-to-add-sqlcmdvariable-in-sqlproj-file)
+  * [How to reference between *sqlproj* files](#how-to-reference-between--sqlproj--files)
+    + [Publish order](#publish-order)
+      - [Use *Include composite objects*](#use--include-composite-objects-)
+      - [Do not use *Include composite objects*](#do-not-use--include-composite-objects-)
+    + [Reference to dacpac](#reference-to-dacpac)
+- [How to connect from SQL Mgmt Studio to localDB](#how-to-connect-from-sql-mgmt-studio-to-localdb)
+
 # SSDT
 ## How to add SqlCmdVariable in sqlproj file
 The following example shows how to add SqlCmdVariable that are set on values stored in Data-tier Application properties.   
