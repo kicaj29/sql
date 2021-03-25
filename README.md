@@ -113,3 +113,4 @@ In ```Server name``` input type: (LocalDB)\v11.0, (LocalDB)\.  (if ended by dot 
 
 [example - transaction1](./SQL%20Server/005_OptymisticLock.sql)   
 [example - transaction2](./SQL%20Server/../SQL%20Server/005_OptymisticLockSecondTrans.sql)
+.
