@@ -1,11 +1,12 @@
 - [SSDT](#ssdt)
-  * [How to add SqlCmdVariable in sqlproj file](#how-to-add-sqlcmdvariable-in-sqlproj-file)
-  * [How to reference between *sqlproj* files](#how-to-reference-between--sqlproj--files)
-    + [Publish order](#publish-order)
-      - [Use *Include composite objects*](#use--include-composite-objects-)
-      - [Do not use *Include composite objects*](#do-not-use--include-composite-objects-)
-    + [Reference to dacpac](#reference-to-dacpac)
+  - [How to add SqlCmdVariable in sqlproj file](#how-to-add-sqlcmdvariable-in-sqlproj-file)
+  - [How to reference between *sqlproj* files](#how-to-reference-between-sqlproj-files)
+    - [Publish order](#publish-order)
+      - [Use *Include composite objects*](#use-include-composite-objects)
+      - [Do not use *Include composite objects*](#do-not-use-include-composite-objects)
+    - [Reference to dacpac](#reference-to-dacpac)
 - [How to connect from SQL Mgmt Studio to localDB](#how-to-connect-from-sql-mgmt-studio-to-localdb)
+- [Optimistic vs. Pessimistic Locking](#optimistic-vs-pessimistic-locking)
 
 # SSDT
 ## How to add SqlCmdVariable in sqlproj file
@@ -99,3 +100,16 @@ Another way is to **do not use** *Include composite objects* option and run ever
 In ```Server name``` input type: (LocalDB)\v11.0, (LocalDB)\.  (if ended by dot it will connect to default localDB)
 
 ![001-localDB-connect.png](images/001-localDB-connect.png)
+
+# Optimistic vs. Pessimistic Locking
+
+[Optimistic vs. Pessimistic Locking](https://recepinanc.medium.com/til-9-optimistic-vs-pessimistic-locking-79a349b76dc8#:~:text=Optimistic%20Locking%20is%20when%20you,can%20start%20modifying%20the%20record.)
+
+[Sql Server example](https://blog.greglow.com/2018/09/24/sql-implementing-optimistic-concurrency-in-sql-server-with-rowversion/)
+
+>"Optimistic Locking is when you check if the record was updated by someone else before you commit the transaction."
+
+>"Pessimistic locking is when you take an exclusive lock so that no one else can start modifying the record."
+
+[example - transaction1](./SQL%20Server/005_OptymisticLock.sql)   
+[example - transaction2](./SQL%20Server/../SQL%20Server/005_OptymisticLockSecondTrans.sql)
