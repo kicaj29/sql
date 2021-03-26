@@ -7,6 +7,7 @@
     - [Reference to dacpac](#reference-to-dacpac)
 - [How to connect from SQL Mgmt Studio to localDB](#how-to-connect-from-sql-mgmt-studio-to-localdb)
 - [Optimistic vs. Pessimistic Locking](#optimistic-vs-pessimistic-locking)
+- [SQL vs No-SQL](#sql-vs-no-sql)
 
 # SSDT
 ## How to add SqlCmdVariable in sqlproj file
@@ -113,4 +114,40 @@ In ```Server name``` input type: (LocalDB)\v11.0, (LocalDB)\.  (if ended by dot 
 
 [example - transaction1](./SQL%20Server/005_OptymisticLock.sql)   
 [example - transaction2](./SQL%20Server/../SQL%20Server/005_OptymisticLockSecondTrans.sql)
-.
+
+
+# SQL vs No-SQL
+
+Pros of a Relational Database (SQL)
+1. Data is easily structured into categories (predefined schema).
+2. Your data is consistent in input, meaning, and easy to navigate.
+3. Relationships can be easily defined between data points.
+4. SQL databases are vertically scalable.
+5. SQL databases are not suitable for hierarchical data storage.
+6. Specialized DB hardware (Oracle Exadata, etc.)
+7. Highly Available Storage (SAN, RAID, etc.)
+
+Pros of a Non-Relational Database (NoSQL)
+1. Data is not confined to a structured group (dynamic schema driven by data).
+2. You can perform functions that allow for greater flexibility.
+3. Your data and analysis can be more dynamic and allow for more variant inputs.
+4. NoSQL databases are horizontally scalable (scale out).
+5. ACID NOT always guaranteed. Use when it's more important to have fast data than correct data. Base ( Basically Available, Soft state, Eventually Consistent) is a model of many NoSQL systems.
+6. Suit more for those who handles huge volumes of data
+7. More suitable for the hierarchical data store as it supports key-value pair method.
+8. Commodity hardware
+9. Commodity drives storage (standard HDDs, JBOD)
+
+Types of NoSQL databases:
+* column-oriented
+* document-oriented
+* graph-based
+* KeyValue store
+
+The Scalability
+>"In most situations, SQL databases are vertically scalable, which means that you can increase the load on a single server by increasing things like CPU, RAM or SSD. NoSQL databases, on the other hand, are horizontally scalable. This means that you handle more traffic by sharding, or adding more servers in your NoSQL database."
+
+
+https://aloa.co/blog/relational-vs-non-relational-database-pros-cons   
+https://www.xplenty.com/blog/the-sql-vs-nosql-difference   
+https://www.guru99.com/sql-vs-nosql.html
