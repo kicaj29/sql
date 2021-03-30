@@ -8,6 +8,7 @@
 - [How to connect from SQL Mgmt Studio to localDB](#how-to-connect-from-sql-mgmt-studio-to-localdb)
 - [Optimistic vs. Pessimistic Locking](#optimistic-vs-pessimistic-locking)
 - [SQL vs No-SQL](#sql-vs-no-sql)
+- [SQL: Bitwise operators to store multiple values in one column](#sql-bitwise-operators-to-store-multiple-values-in-one-column)
 
 # SSDT
 ## How to add SqlCmdVariable in sqlproj file
@@ -151,3 +152,9 @@ The Scalability
 https://aloa.co/blog/relational-vs-non-relational-database-pros-cons   
 https://www.xplenty.com/blog/the-sql-vs-nosql-difference   
 https://www.guru99.com/sql-vs-nosql.html
+
+# SQL: Bitwise operators to store multiple values in one column
+
+[bitwise.sql](./SQL%20Server/Bitwise.sql)
+
+https://www.mssqltips.com/sqlservertip/1218/sql-server-bitwise-operators-to-store-multiple-values-in-one-column/   
