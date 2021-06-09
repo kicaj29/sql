@@ -8,6 +8,8 @@
 - [How to connect from SQL Mgmt Studio to localDB](#how-to-connect-from-sql-mgmt-studio-to-localdb)
 - [Optimistic vs. Pessimistic Locking](#optimistic-vs-pessimistic-locking)
 - [SQL vs No-SQL](#sql-vs-no-sql)
+  - [Relational database model](#relational-database-model)
+  - [No-sql database model](#no-sql-database-model)
 - [SQL: Bitwise operators to store multiple values in one column](#sql-bitwise-operators-to-store-multiple-values-in-one-column)
 
 # SSDT
@@ -141,13 +143,20 @@ Pros of a Non-Relational Database (NoSQL)
 
 Types of NoSQL databases:
 * column-oriented
-* document-oriented
+* document-oriented (similar to key-value but value can be a structure for example json)
 * graph-based
-* KeyValue store
+* key-value store
 
 The Scalability
 >"In most situations, SQL databases are vertically scalable, which means that you can increase the load on a single server by increasing things like CPU, RAM or SSD. NoSQL databases, on the other hand, are horizontally scalable. This means that you handle more traffic by sharding, or adding more servers in your NoSQL database."
 
+## Relational database model
+
+![002-rel-database-model.png](images/002-rel-database-model.png)
+
+## No-sql database model
+
+![003-no-sql-database-model.png](images/003-no-sql-database-model.png)
 
 https://aloa.co/blog/relational-vs-non-relational-database-pros-cons   
 https://www.xplenty.com/blog/the-sql-vs-nosql-difference   
