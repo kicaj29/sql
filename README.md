@@ -7,10 +7,14 @@
     - [Reference to dacpac](#reference-to-dacpac)
 - [How to connect from SQL Mgmt Studio to localDB](#how-to-connect-from-sql-mgmt-studio-to-localdb)
 - [Optimistic vs. Pessimistic Locking](#optimistic-vs-pessimistic-locking)
+- [SQL: Bitwise operators to store multiple values in one column](#sql-bitwise-operators-to-store-multiple-values-in-one-column)
 - [SQL vs No-SQL](#sql-vs-no-sql)
+  - [Types of NoSQL databases](#types-of-nosql-databases)
   - [Relational database model](#relational-database-model)
   - [No-sql database model](#no-sql-database-model)
-- [SQL: Bitwise operators to store multiple values in one column](#sql-bitwise-operators-to-store-multiple-values-in-one-column)
+  - [ACID vs Cap Theorem](#acid-vs-cap-theorem)
+    - [ACID](#acid)
+    - [Cap Theorem](#cap-theorem)
 
 # SSDT
 ## How to add SqlCmdVariable in sqlproj file
@@ -118,6 +122,11 @@ In ```Server name``` input type: (LocalDB)\v11.0, (LocalDB)\.  (if ended by dot 
 [example - transaction1](./SQL%20Server/005_OptymisticLock.sql)   
 [example - transaction2](./SQL%20Server/../SQL%20Server/005_OptymisticLockSecondTrans.sql)
 
+# SQL: Bitwise operators to store multiple values in one column
+
+[bitwise.sql](./SQL%20Server/Bitwise.sql)
+
+https://www.mssqltips.com/sqlservertip/1218/sql-server-bitwise-operators-to-store-multiple-values-in-one-column/   
 
 # SQL vs No-SQL
 
@@ -141,11 +150,11 @@ Pros of a Non-Relational Database (NoSQL)
 8. Commodity hardware
 9. Commodity drives storage (standard HDDs, JBOD)
 
-Types of NoSQL databases:
-* column-oriented
-* document-oriented (similar to key-value but value can be a structure for example json)
-* graph-based
-* key-value store
+## Types of NoSQL databases
+* column-oriented (wide-column stores) - similar to relational databases, it stores data in tables and rows but it has dynamic columns, each row is not required to have the same columns, it is like two dimensional key-value databases, examples: Casandra,  HBase
+* document-oriented (similar to key-value but value can be a structure for example **json**), examples: MongoDB
+* graph-based: good for traveling through parents, kids, siblings etc.
+* key-value store, examples: Redis and DynamoDB
 
 The Scalability
 >"In most situations, SQL databases are vertically scalable, which means that you can increase the load on a single server by increasing things like CPU, RAM or SSD. NoSQL databases, on the other hand, are horizontally scalable. This means that you handle more traffic by sharding, or adding more servers in your NoSQL database."
@@ -162,8 +171,27 @@ https://aloa.co/blog/relational-vs-non-relational-database-pros-cons
 https://www.xplenty.com/blog/the-sql-vs-nosql-difference   
 https://www.guru99.com/sql-vs-nosql.html
 
-# SQL: Bitwise operators to store multiple values in one column
+## ACID vs Cap Theorem
 
-[bitwise.sql](./SQL%20Server/Bitwise.sql)
+### ACID
 
-https://www.mssqltips.com/sqlservertip/1218/sql-server-bitwise-operators-to-store-multiple-values-in-one-column/   
+This describes a set of properties that apply to data transactions, defined as follows:
+
+* Atomicity - Everything in a transaction must happen successfully or none of the changes are committed. This avoids a transaction that changes multiple pieces of data from failing halfway and only making a few changes.
+* Consistency - The data will only be committed if it passes all the rules in place in the database (ie: data types, triggers, constraints, etc).
+* Isolation - Transactions won't affect other transactions by changing data that another operation is counting on; and other users won't see partial results of a transaction in progress (depending on isolation mode).
+* Durability - Once data is committed, it is durably stored and safe against errors, crashes or any other (software) malfunctions within the database.
+
+### Cap Theorem
+
+[L16: The CAP Theorem](https://www.youtube.com/watch?v=k-Yaq8AHlFA)
+
+CAP provides the basic requirements that a distributed system must follow.
+
+* Consistency - All the servers in the system will have the same data so users will get the same copy regardless of which server answers their request.   
+* Availability - The system will always respond to a request (even if it's not the latest data or consistent across the system or just a message saying the system isn't working).
+* Partition Tolerance - The system continues to operate as a whole even if individual servers fail or can't be reached.
+
+It's theoretically impossible to have all 3 requirements met, so a combination of 2 must be chosen and this is usually the deciding factor in what technology is used.   
+
+When it comes to distributed databases, the two choices are only AP or CP because if it's not partition tolerant, it's not really a reliable distributed database. So the choice is simpler: if a network split happens, do you want the database to keep answering but with possibly old/bad data (AP)? Or should it just stop responding unless you can get the absolute latest copy (CP)?
