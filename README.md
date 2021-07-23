@@ -15,6 +15,7 @@
   - [ACID vs Cap Theorem](#acid-vs-cap-theorem)
     - [ACID](#acid)
     - [Cap Theorem](#cap-theorem)
+  - [No-SQL key space](#no-sql-key-space)
 
 # SSDT
 ## How to add SqlCmdVariable in sqlproj file
@@ -195,3 +196,10 @@ CAP provides the basic requirements that a distributed system must follow.
 It's theoretically impossible to have all 3 requirements met, so a combination of 2 must be chosen and this is usually the deciding factor in what technology is used.   
 
 When it comes to distributed databases, the two choices are only AP or CP because if it's not partition tolerant, it's not really a reliable distributed database. So the choice is simpler: if a network split happens, do you want the database to keep answering but with possibly old/bad data (AP)? Or should it just stop responding unless you can get the absolute latest copy (CP)?
+
+## No-SQL key space
+
+Key spaces is a range of hash values calculated based on the key value.
+Thx to this distributed system knows in which server store the data.
+
+![004-key-space.png](images/004-key-space.png)
